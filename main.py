@@ -1,10 +1,12 @@
 import numpy as np
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 def solution(src, dest):
     necesary_movements = 7
-    chessboard = np.array([[0, 1, 2, 3, 4, 5, 6, 7],
-                           [8, 9, 10, 11, 12, 13, 14, 15],
+    chessboard = np.array([[ 0,  1,  2,  3,  4,  5,  6,  7],
+                           [ 8,  9, 10, 11, 12, 13, 14, 15],
                            [16, 17, 18, 19, 20, 21, 22, 23],
                            [24, 25, 26, 27, 28, 29, 30, 31],
                            [32, 33, 34, 35, 36, 37, 38, 39],
@@ -69,8 +71,8 @@ def solution(src, dest):
 def amount_of_moves_1(init, dest):
     moves_to_pass = []
     posible_range = range(0, 8)
-    chessboard = np.array([[0, 1, 2, 3, 4, 5, 6, 7],
-                           [8, 9, 10, 11, 12, 13, 14, 15],
+    chessboard = np.array([[ 0,  1,  2,  3,  4,  5,  6,  7],
+                           [ 8,  9, 10, 11, 12, 13, 14, 15],
                            [16, 17, 18, 19, 20, 21, 22, 23],
                            [24, 25, 26, 27, 28, 29, 30, 31],
                            [32, 33, 34, 35, 36, 37, 38, 39],
@@ -150,23 +152,45 @@ def amount_of_moves_1(init, dest):
     # =============== #
 
 
-chessboard = [[0, 1, 2, 3, 4, 5, 6, 7],
-              [8, 9, 10, 11, 12, 13, 14, 15],
+chessboard = [[ 0,  1,  2,  3,  4,  5,  6,  7],
+              [ 8,  9, 10, 11, 12, 13, 14, 15],
               [16, 17, 18, 19, 20, 21, 22, 23],
               [24, 25, 26, 27, 28, 29, 30, 31],
               [32, 33, 34, 35, 36, 37, 38, 39],
               [40, 41, 42, 43, 44, 45, 46, 47],
               [48, 49, 50, 51, 52, 53, 54, 55],
-              [56, 57, 58, 59, 60, 61, 62, 63]]
+              [56, 57, 58, 59, 60, 61, 62, 63]] 
+
+
+chessboard_txt = """[ 0,  1,  2,  3,  4,  5,  6,  7],
+[ 8,  9, 10, 11, 12, 13, 14, 15],
+[16, 17, 18, 19, 20, 21, 22, 23],
+[24, 25, 26, 27, 28, 29, 30, 31],
+[32, 33, 34, 35, 36, 37, 38, 39],
+[40, 41, 42, 43, 44, 45, 46, 47],
+[48, 49, 50, 51, 52, 53, 54, 55],
+[56, 57, 58, 59, 60, 61, 62, 63]""" 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print('CHESSBOARD COORDINATES')
-    for i in chessboard:
-        print(i)
+    print(chessboard_txt)
+        
     init, dest = input('select the initial and final coordinates in order to find the\n'
                        'necessaries amount of movement needed to go there.\n'
                        'format -> "number, number" ').split()
-    print(solution(int(init), int(dest)))
+
+    print("PROCESING...\n")
+    chessboard_txt = chessboard_txt.replace(f' {init},', "  X,")
+    chessboard_txt = chessboard_txt.replace(f' {init}]', " X]")
+    chessboard_txt = chessboard_txt.replace(f'[{init}', "[ X")
+    print(chessboard_txt)
+    print("PROCESING...\n")
+    chessboard_txt = chessboard_txt.replace(f' {dest},', "  X,")
+    chessboard_txt = chessboard_txt.replace(f' {dest}]', " X]")
+    chessboard_txt = chessboard_txt.replace(f'[{dest}', "[ X")
+    print(chessboard_txt)
+
+    print(f'the minimum amount of moves are {solution(int(init), int(dest))}')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
